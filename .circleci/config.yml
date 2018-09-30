@@ -44,7 +44,7 @@ jobs:
             - node_modules
           key: dependency-cache--{{ checksum "package.json" }}
       - persist_to_workspace:
-          root: ~/traces-of-lifgt
+          root: ~/traces-of-light
           <<: *whitelist
   lint:
     <<: *defaults
