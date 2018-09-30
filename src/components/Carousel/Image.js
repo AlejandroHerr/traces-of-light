@@ -24,7 +24,7 @@ const Image = ({
           }
         </div>
       </div>
-      <div style={{ width: height * childImageSharp.fluid.aspectRatio }}>
+      <div style={{ height, width: height * childImageSharp.fluid.aspectRatio }}>
         <Img fluid={childImageSharp.fluid} height={height} />
       </div>
     </div>

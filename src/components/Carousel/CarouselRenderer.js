@@ -31,7 +31,10 @@ const CarouselRenderer = ({
   >
     <div
       className={styles.carousel_inner}
-      style={{ width: `${innerWidth}px`, transform: `translate3d(-${viewPortOffset}%,0,0)` }}
+      style={{
+        width: (innerWidth && `${innerWidth}px`) || '100%',
+        transform: `translate3d(-${viewPortOffset}%,0,0)`,
+      }}
     >
       {images.map(({ node }) => (
         <Image
