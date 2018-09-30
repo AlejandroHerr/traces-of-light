@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import GatsbyLink from 'gatsby-link';
 
 import styles from './Footer.module.scss';
 
@@ -17,12 +18,12 @@ const Pagination = ({
         </span>
       )
       : (
-        <a
-          href={(index > 2 && `/${index - 1}`) || '/'}
+        <GatsbyLink
           className={classnames(styles.pagination_nav_link, styles.pagination_nav_previous)}
+          to={(index > 2 && `/${index - 1}`) || '/'}
         >
           ‹
-        </a>
+        </GatsbyLink>
       )
     }
     <span className="page-number">
@@ -36,7 +37,14 @@ const Pagination = ({
           &nbsp;
         </span>
       )
-      : <a href={`/${index + 1}`} className={classnames(styles.pagination_nav_link, styles.pagination_nav_next)}>›</a>
+      : (
+        <GatsbyLink
+          className={classnames(styles.pagination_nav_link, styles.pagination_nav_next)}
+          to={`/${index + 1}`}
+        >
+          ›
+        </GatsbyLink>
+      )
     }
   </nav>
 );
