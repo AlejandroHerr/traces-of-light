@@ -26,6 +26,15 @@ module.exports = {
         path: path.join(__dirname, 'data'),
       },
     },
+    {
+      resolve: 'gatsby-plugin-web-font-loader',
+      options: {
+        custom: {
+          families: ['Iosevka Web'],
+          urls: ['/fonts/iosevka/webfont.css'],
+        },
+      },
+    },
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
     'gatsby-plugin-offline',
