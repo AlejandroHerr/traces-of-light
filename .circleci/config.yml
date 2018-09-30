@@ -1,0 +1,100 @@
+
+defaults: &defaults
+  working_directory: ~/traces-of-light
+  docker:
+    - image: circleci/node:8.9-stretch
+      environment:
+          TZ: "/usr/share/zoneinfo/Europe/Warsaw"
+  environment:
+      TZ: "/usr/share/zoneinfo/Europe/Warsaw"
+
+whitelist: &whitelist
+  paths:
+    - .git/
+    - data/
+    - node_modules/
+    - src/
+    - .eslintrc.js
+    - .stylelintrc
+    - .gitignore
+    - .prettierrc
+    - .stylelintrc.json
+    - package.json
+    - yarn.lock
+    - gatsby-browser.js
+    - gatsby-config.js
+    - gatsby-node.js
+    - gatsby-ssr.js
+
+version: 2
+jobs:
+  checkout:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+          - dependency-cache--{{ checksum "package.json" }}
+          - dependency-cache--
+      - run:
+          name: Install Dependencies
+          command: yarn install
+      - save_cache:
+          paths:
+            - node_modules
+          key: dependency-cache--{{ checksum "package.json" }}
+      - persist_to_workspace:
+          root: ~/traces-of-lifgt
+          <<: *whitelist
+  lint:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/traces-of-light
+      - run:
+          name: Eslint check
+          command: yarn lint:code
+  stylelint:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/traces-of-light
+      - run:
+          name: Stylelint check
+          command: yarn lint:styles
+#   test:
+#     <<: *defaults
+#     steps:
+#     - attach_workspace:
+#         at: ~/traces-of-light
+#     - run:
+#         name: Test
+#         command: yarn test:coverage
+  build:
+    <<: *defaults
+    steps:
+    - attach_workspace:
+        at: ~/traces-of-light
+    - run:
+        name: Build
+        command: yarn build
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - checkout
+      - flow_typed:
+          requires:
+            - checkout
+      - lint:
+          requires:
+            - checkout
+      - stylelint:
+          requires:
+            - checkout
+    #   - test:
+    #       requires:
+    #         - checkout
+      - build:
+          requires:
+            - checkout
