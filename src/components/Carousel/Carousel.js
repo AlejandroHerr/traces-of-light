@@ -247,7 +247,7 @@ export default class Carrousel extends PureComponent {
         viewPortOffset={viewPortOffset}
         setRef={this.setWrapperRef}
         onMouseScrollStart={this.onMouseScrollStart}
-        onTouchScrollStart={() => this.onTouchScrollStart}
+        onTouchScrollStart={this.onTouchScrollStart}
         onWheelScroll={this.onWheelScroll}
       />
     );
