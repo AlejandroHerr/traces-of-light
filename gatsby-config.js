@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
   siteMetadata: {
-    title: 'Gatsby Default Starter',
+    title: 'Traces of Light',
   },
   plugins: [
     'gatsby-plugin-react-helmet',
