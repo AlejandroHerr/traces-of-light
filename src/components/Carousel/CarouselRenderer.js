@@ -5,8 +5,7 @@ import { EdgeTypes } from '../../propTypes/EdgesTypes';
 import ImageTypes from '../../propTypes/ImageTypes';
 
 import ScrollBar from './ScrollBar';
-import Image from './Image';
-
+import Image from '../Image';
 
 import styles from './Carousel.module.scss';
 

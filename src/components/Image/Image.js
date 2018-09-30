@@ -1,10 +1,34 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import Img from 'gatsby-image';
+import GatsbyImage from 'gatsby-image';
+import GatsbyLink from 'gatsby-link';
+import slugify from 'slugify';
 
 import ImageSharpTypes from '../../propTypes/ImageSharpTypes';
 
-import styles from './Carousel.module.scss';
+import styles from './Image.module.scss';
+
+const TagLink = ({ tag }) => (
+  <GatsbyLink className={styles.image_tagLink} to={slugify(tag)}>
+    {tag}
+  </GatsbyLink>
+);
+TagLink.propTypes = {
+  tag: PropTypes.string.isRequired,
+};
+const Tag = ({ tag, last }) => (last
+  ? (
+    <>
+      <TagLink tag={tag} />
+      {', '}
+    </>
+  )
+  : <TagLink tag={tag} />
+);
+Tag.propTypes = {
+  tag: PropTypes.string.isRequired,
+  last: PropTypes.bool.isRequired,
+};
 
 const Image = ({
   height, title, tags, image: { childImageSharp },
@@ -17,20 +41,12 @@ const Image = ({
         </h2>
         <div className={styles.image_tags}>
           {(tags && tags.length)
-            && tags.map((tag, idx) => ((idx + 1 < tags.length)
-              ? (
-                <Fragment key={tag}>
-                  <span key={tag}>{tag}</span>
-                  {', '}
-                </Fragment>
-              )
-              : <span key={tag}>{tag}</span>
-            ))
+            && tags.map((tag, idx) => <Tag key={tag} tag={tag} last={(idx + 1) < tags.length} />)
           }
         </div>
       </div>
       <div style={{ height, width: height * childImageSharp.fluid.aspectRatio }}>
-        <Img fluid={childImageSharp.fluid} height={height} />
+        <GatsbyImage fluid={childImageSharp.fluid} height={height} />
       </div>
     </div>
   </article>

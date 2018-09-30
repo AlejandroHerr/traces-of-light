@@ -15,12 +15,13 @@ const GalleryPage = ({
     index,
     last,
     pageCount,
+    pathPrefix,
   },
 }) => (
   <Layout>
     <h1>Traces of light</h1>
     <Carousel images={group} />
-    <Footer first={first} index={index} last={last} pageCount={pageCount} />
+    <Footer first={first} index={index} last={last} pageCount={pageCount} pathPrefix={pathPrefix} />
   </Layout>
 );
 

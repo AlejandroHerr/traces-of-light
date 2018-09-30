@@ -1,7 +1,8 @@
 const createPaginatedPages = require('gatsby-paginate');
+const slugify = require('slugify');
 
-exports.createPages = ({ graphql, boundActionCreators }) => {
-  const { createPage } = boundActionCreators;
+exports.createPages = ({ graphql, actions }) => {
+  const { createPage } = actions;
   return graphql(`
       {
         images: allImagesJson {
@@ -36,14 +37,50 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
 
       return result;
     })
-    .then(({ data }) => createPaginatedPages({
-      edges: data.images.edges,
-      createPage,
-      pageTemplate: 'src/templates/GalleryPage.js',
-      pageLength: 6,
-    }))
+    .then(({ data }) => {
+      createPaginatedPages({
+        edges: data.images.edges,
+        createPage,
+        pageTemplate: 'src/templates/GalleryPage.js',
+        pageLength: 6,
+      });
+
+      const imagesByTag = data.images.edges.reduce((byTag, edge) => {
+        const { node: image } = edge;
+
+        if (!image.tags && !image.tags.length) {
+          return byTag;
+        }
+
+        return image.tags.map(slugify).reduce((acc, tag) => {
+          if (acc[tag]) {
+            return {
+              ...acc,
+              [tag]: acc[tag].concat(edge),
+            };
+          }
+
+          return {
+            ...acc,
+            [tag]: [edge],
+          };
+        }, byTag);
+      }, {});
+
+      Object.entries(imagesByTag).forEach(([tag, edges]) => {
+        createPaginatedPages({
+          edges,
+          createPage,
+          pageTemplate: 'src/templates/GalleryPage.js',
+          pageLength: 6,
+          pathPrefix: tag,
+        });
+      });
+
+      return data;
+    })
     .catch((error) => {
-      console.log(error);
+      console.error(error);
 
       throw error;
     });

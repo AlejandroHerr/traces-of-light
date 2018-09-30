@@ -2,11 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import GatsbyLink from 'gatsby-link';
+import path from 'path';
 
 import styles from './Footer.module.scss';
 
 const Pagination = ({
-  first, index, last, pageCount,
+  first, index, last, pageCount, pathPrefix,
 }) => (
   <nav className="pagination">
     { first
@@ -20,7 +21,7 @@ const Pagination = ({
       : (
         <GatsbyLink
           className={classnames(styles.pagination_nav_link, styles.pagination_nav_previous)}
-          to={(index > 2 && `/${index - 1}`) || '/'}
+          to={path.join('/', pathPrefix, (index > 2 && `${index - 1}`) || '')}
         >
           ‹
         </GatsbyLink>
@@ -40,7 +41,7 @@ const Pagination = ({
       : (
         <GatsbyLink
           className={classnames(styles.pagination_nav_link, styles.pagination_nav_next)}
-          to={`/${index + 1}`}
+          to={path.join('/', pathPrefix, `${index + 1}`)}
         >
           ›
         </GatsbyLink>
@@ -54,7 +55,7 @@ Pagination.propTypes = {
   index: PropTypes.number.isRequired,
   last: PropTypes.bool.isRequired,
   pageCount: PropTypes.number.isRequired,
-  // pathPrefix: PropTypes.string.isRequired,
+  pathPrefix: PropTypes.string.isRequired,
 };
 
 
