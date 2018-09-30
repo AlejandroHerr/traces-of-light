@@ -2,7 +2,7 @@
 defaults: &defaults
   working_directory: ~/traces-of-light
   docker:
-    - image: circleci/node:8.9-stretch
+    - image: circleci/node:carbon-stretch
       environment:
           TZ: "/usr/share/zoneinfo/Europe/Warsaw"
   environment:
