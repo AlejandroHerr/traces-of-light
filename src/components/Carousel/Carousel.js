@@ -16,7 +16,7 @@ const calculateDimensions = (wrapper, images) => {
     (sum, { node }) => node.image.childImageSharp.fluid.aspectRatio + sum,
     0,
   );
-  const innerWidth = widthFactor * (clientHeight) + (images.length - 1) * 10;
+  const innerWidth = widthFactor * (clientHeight) + (images.length - 1) * 10 + 1;
 
   const viewPortWidth = 100 * clientWidth / innerWidth;
 

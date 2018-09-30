@@ -18,8 +18,8 @@ const Image = ({
         <div className={styles.image_tags}>
           {(tags && tags.length)
             && tags.map((tag, idx) => ((idx + 1 < tags.length)
-              ? <><span>{tag}</span>,{' '}</>
-              : <span>{tag}</span>
+              ? <><span key={tag}>{tag}</span>,{' '}</>
+              : <span key={tag}>{tag}</span>
             ))
           }
         </div>
