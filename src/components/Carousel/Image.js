@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Img from 'gatsby-image';
 
@@ -18,7 +18,12 @@ const Image = ({
         <div className={styles.image_tags}>
           {(tags && tags.length)
             && tags.map((tag, idx) => ((idx + 1 < tags.length)
-              ? <><span key={tag}>{tag}</span>,{' '}</>
+              ? (
+                <Fragment key={tag}>
+                  <span key={tag}>{tag}</span>
+                  {', '}
+                </Fragment>
+              )
               : <span key={tag}>{tag}</span>
             ))
           }
