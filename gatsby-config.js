@@ -3,6 +3,8 @@ const path = require('path');
 module.exports = {
   siteMetadata: {
     title: 'Traces of Light',
+    descriptions: 'Photographic portofolio of Alejandro Herr',
+    keywords: 'photography, analog',
   },
   plugins: [
     'gatsby-plugin-react-helmet',
