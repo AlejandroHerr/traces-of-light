@@ -18,57 +18,6 @@
   height: 100%;
 }
 
-.image {
-  width: auto;
-  height: 100%;
-  margin: 0 0 0 10px;
-  float: left;
-}
-
-.image:first-child {
-  margin-left: 0;
-}
-
-.image_wrapper {
-  position: relative;
-}
-
-.image_info {
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  padding: 30px;
-  box-sizing: border-box;
-  z-index: $Z-INDEX-10;
-}
-
-.image_title {
-  display: inline-block;
-  margin: 0;
-  padding: 2px 5px;
-  background-color: $BLACK;
-  color: $WHITE;
-  font-family: 'Iosevka', sans-serif;
-  font-size: .75em;
-  font-weight: 300;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-}
-
-.image_tags {
-  position: absolute;
-  bottom: 30px;
-  left: 30px;
-  color: $WHITE;
-  font-family: 'Iosevka', sans-serif;
-  font-size: .688em;
-  text-shadow: 1px 1px 0 rgba(0, 0, 0, .6);
-  text-transform: uppercase;
-}
-
 .scrollBar {
   position: absolute;
   bottom: 0;

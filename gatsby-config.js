@@ -2,10 +2,18 @@ const path = require('path');
 
 module.exports = {
   siteMetadata: {
-    title: 'Gatsby Default Starter',
+    title: 'Traces of Light',
+    description: 'Photographic portofolio of Alejandro Herr',
+    keywords: 'photography, analog',
   },
   plugins: [
     'gatsby-plugin-react-helmet',
+    {
+      resolve: 'gatsby-plugin-google-analytics',
+      options: {
+        trackingId: process.env.GA_ID || '',
+      },
+    },
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
@@ -26,10 +34,20 @@ module.exports = {
         path: path.join(__dirname, 'data'),
       },
     },
+    {
+      resolve: 'gatsby-plugin-web-font-loader',
+      options: {
+        custom: {
+          families: ['Iosevka Web'],
+          urls: ['/fonts/iosevka/webfont.css'],
+        },
+      },
+    },
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
     'gatsby-plugin-offline',
     'gatsby-plugin-sass',
     'gatsby-plugin-eslint',
+    'gatsby-plugin-netlify',
   ],
 };

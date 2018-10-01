@@ -1,0 +1,52 @@
+@import '../../vars';
+
+.footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 40px;
+  box-sizing: border-box;
+  padding: 0 20px;
+  font-family: $MAIN_FONT_FAMILY;
+  font-size: .75em;
+  line-height: 40px;
+  text-transform: uppercase;
+}
+
+.footer_license {
+  float: left;
+}
+
+.license_image {
+  margin-top: -2px;
+  margin-bottom: 0;
+  padding-right: 5px;
+  vertical-align: middle;
+}
+
+.footer_pagination {
+  float: right;
+}
+
+.pagination_nav_placeholder,
+.pagination_nav_link {
+  display: inline-block;
+  padding: 0 10px;
+  outline: 0;
+  color: $BLACK;
+  text-decoration: none;
+}
+
+.pagination_nav_link:hover {
+  background-color: $BLACK;
+  color: $WHITE;
+}
+
+.pagination_nav_previous {
+  margin-right: 20px;
+}
+
+.pagination_nav_next {
+  margin-left: 20px;
+}

@@ -1,0 +1,23 @@
+@import '../../vars';
+
+.header {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 40px;
+  box-sizing: border-box;
+  padding: 0 20px;
+  font-size: .75em;
+  line-height: 40px;
+}
+
+.header_title {
+  float: left;
+
+  h1 {
+    margin-top: .2em;
+    font-family: $MAIN_FONT_FAMILY;
+    text-transform: uppercase;
+  }
+}

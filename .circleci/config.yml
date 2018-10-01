@@ -2,7 +2,7 @@
 defaults: &defaults
   working_directory: ~/traces-of-light
   docker:
-    - image: circleci/node:8.9-stretch
+    - image: circleci/node:carbon-stretch
       environment:
           TZ: "/usr/share/zoneinfo/Europe/Warsaw"
   environment:
@@ -44,7 +44,7 @@ jobs:
             - node_modules
           key: dependency-cache--{{ checksum "package.json" }}
       - persist_to_workspace:
-          root: ~/traces-of-lifgt
+          root: ~/traces-of-light
           <<: *whitelist
   lint:
     <<: *defaults
@@ -83,9 +83,6 @@ workflows:
   build_and_test:
     jobs:
       - checkout
-      - flow_typed:
-          requires:
-            - checkout
       - lint:
           requires:
             - checkout
