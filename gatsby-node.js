@@ -10,7 +10,7 @@ exports.createPages = ({ graphql, actions }) => {
             title
           }
         }
-        images: allImagesJson {
+        images: allImagesJson(sort: { fields: id }) {
           edges {
             node {
               id

@@ -1,4 +1,4 @@
-/* global window */
+/* global window,document */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
@@ -59,8 +59,8 @@ export default class Carrousel extends PureComponent {
   componentDidMount() {
     window.addEventListener('resize', this.onResize);
 
-    window.addEventListener('mousemove', this.onMouseScroll);
-    window.addEventListener('mouseup', this.onMouseScrollEnd);
+    document.addEventListener('mousemove', this.onMouseScroll);
+    document.addEventListener('mouseup', this.onMouseScrollEnd);
 
     window.addEventListener('touchmove', this.onTouchScroll);
     window.addEventListener('touchend', this.onTouchScrollEnd);
@@ -71,8 +71,8 @@ export default class Carrousel extends PureComponent {
   componentWillUnmount() {
     window.removeEventListener('resize', this.onResize);
 
-    window.removeEventListener('mousemove', this.onMouseScroll);
-    window.removeEventListener('mouseup', this.onMouseScrollEnd);
+    document.removeEventListener('mousemove', this.onMouseScroll);
+    document.removeEventListener('mouseup', this.onMouseScrollEnd);
 
     window.removeEventListener('touchmove', this.onTouchScroll);
     window.removeEventListener('touchend', this.onTouchScrollEnd);
