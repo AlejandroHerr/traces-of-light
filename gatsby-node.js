@@ -5,11 +5,6 @@ exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions;
   return graphql(`
       {
-        site {
-          siteMetadata {
-            title
-          }
-        }
         images: allImagesJson(sort: { fields: id }) {
           edges {
             node {
@@ -43,16 +38,11 @@ exports.createPages = ({ graphql, actions }) => {
       return result;
     })
     .then(({ data }) => {
-      const { title } = data.site.siteMetadata;
-
       createPaginatedPages({
         edges: data.images.edges,
         createPage,
         pageTemplate: 'src/templates/GalleryPage.js',
         pageLength: 6,
-        context: {
-          title,
-        },
       });
 
       const imagesByTag = data.images.edges.reduce((byTag, edge) => {
@@ -84,9 +74,6 @@ exports.createPages = ({ graphql, actions }) => {
           pageTemplate: 'src/templates/GalleryPage.js',
           pageLength: 6,
           pathPrefix: tag,
-          context: {
-            title,
-          },
         });
       });
 
