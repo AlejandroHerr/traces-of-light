@@ -29,7 +29,7 @@ const LayoutRenderer = ({
       ]}
     >
       <html lang="en" />
-      <link rel="canonical" href={siteMetadata.canonical} />
+      <link rel="canonical" href={buildUrl(siteMetadata.canonical, pathname)} />
     </Helmet>
     <div>
       <Header title={siteMetadata.title} />
