@@ -8,8 +8,12 @@ import Footer from '../components/Footer';
 
 import ImageTypes from '../propTypes/ImageTypes';
 import PathContextTypes from '../propTypes/PathContextTypes';
+import LocationTypes from '../propTypes/LocationTypes';
 
 const GalleryPage = ({
+  location: {
+    pathname,
+  },
   pageContext: {
     group,
     first,
@@ -19,13 +23,14 @@ const GalleryPage = ({
     pathPrefix,
   },
 }) => (
-  <Layout>
+  <Layout pathname={pathname} image={group[0].node.image.childImageSharp.resize}>
     <Carousel images={group} />
     <Footer first={first} index={index} last={last} pageCount={pageCount} pathPrefix={pathPrefix} />
   </Layout>
 );
 
 GalleryPage.propTypes = {
+  location: LocationTypes.isRequired,
   pageContext: PathContextTypes(ImageTypes).isRequired,
 };
 

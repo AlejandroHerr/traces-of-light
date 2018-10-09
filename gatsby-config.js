@@ -5,6 +5,8 @@ module.exports = {
     title: 'Traces of Light',
     description: 'Photographic portofolio of Alejandro Herr',
     keywords: 'photography, analog',
+    author: 'Alejandro Hernandez',
+    canonical: 'https://traces-of-light.alejandroherr.io',
   },
   plugins: [
     'gatsby-plugin-react-helmet',

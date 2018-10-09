@@ -6,7 +6,7 @@ import LayoutRenderer from './LayoutRenderer';
 
 import './Layout.scss';
 
-const Layout = ({ children }) => (
+const Layout = ({ children, image, pathname }) => (
   <StaticQuery
     query={graphql`
       query SiteTitleQuery {
@@ -15,12 +15,14 @@ const Layout = ({ children }) => (
             title
             description
             keywords
+            author
+            canonical
           }
         }
       }
     `}
     render={({ site }) => (
-      <LayoutRenderer siteMetadata={site.siteMetadata}>
+      <LayoutRenderer image={image} pathname={pathname} siteMetadata={site.siteMetadata}>
         {children}
       </LayoutRenderer>
     )
@@ -30,6 +32,14 @@ const Layout = ({ children }) => (
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
+  image: PropTypes.shape({
+    src: PropTypes.string.isRequired,
+  }),
+  pathname: PropTypes.string.isRequired,
+};
+
+Layout.defaultProps = {
+  image: null,
 };
 
 export default Layout;

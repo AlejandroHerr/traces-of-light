@@ -1,4 +1,5 @@
 /* stylelint-disable no-duplicate-selectors */
+@import '../../vars';
 
 html {
   font-family: sans-serif;
@@ -239,7 +240,7 @@ html {
 }
 
 body {
-  color: hsla(0, 0%, 0%, .8);
+  color: $BLACK_SHADOW;
   font-family: georgia, serif;
   font-weight: normal;
   word-wrap: break-word;
