@@ -34,8 +34,12 @@ Layout.propTypes = {
   children: PropTypes.node.isRequired,
   image: PropTypes.shape({
     src: PropTypes.string.isRequired,
-  }).isRequired,
+  }),
   pathname: PropTypes.string.isRequired,
+};
+
+Layout.defaultProps = {
+  image: null,
 };
 
 export default Layout;
