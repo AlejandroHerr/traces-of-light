@@ -23,6 +23,9 @@ exports.createPages = ({ graphql, actions }) => {
                     srcWebp
                     srcSetWebp
                   }
+                  resize(width: 1200, height: 620) {
+                    src
+                  }
                 }
               }
             }
