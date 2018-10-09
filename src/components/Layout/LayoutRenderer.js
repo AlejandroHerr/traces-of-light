@@ -17,11 +17,6 @@ const LayoutRenderer = ({
       meta={[
         { name: 'description', content: siteMetadata.description },
         { name: 'keywords', content: siteMetadata.keywords },
-        { name: 'og:url', content: buildUrl(siteMetadata.canonical, pathname) },
-        { name: 'og:title', content: siteMetadata.title },
-        { name: 'og:description', content: siteMetadata.description },
-        { name: 'og:image', content: image && image.src && buildUrl(siteMetadata.canonical, image.src) },
-        { name: 'og:type', content: 'website' },
         { name: 'twitter:card', content: 'summary' },
         { name: 'twitter:title', content: siteMetadata.title },
         { name: 'twitter:description', content: siteMetadata.description },
@@ -30,6 +25,14 @@ const LayoutRenderer = ({
     >
       <html lang="en" />
       <link rel="canonical" href={buildUrl(siteMetadata.canonical, pathname)} />
+      <meta property="og:url" content={buildUrl(siteMetadata.canonical, pathname)} />
+      <meta property="og:title" content={siteMetadata.title} />
+      <meta property="og:description" content={siteMetadata.description} />
+      <meta property="og:type" content="website" />
+      <meta
+        property="og:image"
+        content={image && image.src && buildUrl(siteMetadata.canonical, image.src)}
+      />
     </Helmet>
     <div>
       <Header title={siteMetadata.title} />
