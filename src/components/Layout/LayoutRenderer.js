@@ -25,7 +25,7 @@ const LayoutRenderer = ({
       <meta property="og:url" content={buildUrl(siteMetadata.canonical, pathname)} />
       <meta property="og:title" content="Traces of Light" />
       <meta property="og:description" content="Photographic portofolio of Alejandro Herr" />
-      <meta property="og:image" content="https://traces-of-light.alejandroherr.io/static/gdansk_03-9b5fb7859c1230996694de3933f9c97f-b473f.jpg" />
+      <meta property="og:image" content={image && image.src && buildUrl(siteMetadata.canonical, image.src)} />
       <meta property="og:type" content="website" />
       <html lang="en" />
     </Helmet>
