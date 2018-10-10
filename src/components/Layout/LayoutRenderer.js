@@ -4,37 +4,36 @@ import Helmet from 'react-helmet';
 
 import Header from '../Header';
 
-const buildUrl = (base, pathname = '') => (!pathname
-  ? base
-  : `${base}/${pathname.replace(/^\//, '')}`.replace(/\/$/, ''));
+const buildUrl = (base, pathname = '') => `${base}${pathname}`.replace(/\/$/, '');
 
 const LayoutRenderer = ({
   children, image, pathname, siteMetadata,
 }) => (
-    <>
-      <Helmet
-        title={siteMetadata.title}
-        meta={[
-          { name: 'description', content: siteMetadata.description },
-          { name: 'keywords', content: siteMetadata.keywords },
-          { name: 'og:url', content: buildUrl(siteMetadata.canonical, pathname) },
-          { name: 'og:title', content: siteMetadata.title },
-          { name: 'og:description', content: siteMetadata.description },
-          { name: 'og:image', content: image && image.src && buildUrl(siteMetadata.canonical, image.src) },
-          { name: 'og:type', content: 'website' },
-          { name: 'twitter:card', content: 'summary' },
-          { name: 'twitter:title', content: siteMetadata.title },
-          { name: 'twitter:description', content: siteMetadata.description },
-          { name: 'twitter:image', content: image && image.src && buildUrl(siteMetadata.canonical, image.src) },
-        ]}
-      >
-        <html lang="en" />
-      </Helmet>
-      <div>
-        <Header title={siteMetadata.title} />
-        {children}
-      </div>
-    </>
+  <>
+    <Helmet
+      link={[{ rel: 'canonical', href: buildUrl(siteMetadata.canonical, pathname) }]}
+      meta={[
+        { name: 'description', content: siteMetadata.description },
+        { name: 'keywords', content: siteMetadata.keywords },
+        { name: 'twitter:card', content: 'summary' },
+        { name: 'twitter:title', content: siteMetadata.title },
+        { name: 'twitter:description', content: siteMetadata.description },
+        { name: 'twitter:image', content: image && image.src && buildUrl(siteMetadata.canonical, image.src) },
+      ]}
+      title={siteMetadata.title}
+    >
+      <meta property="og:url" content={buildUrl(siteMetadata.canonical, pathname)} />
+      <meta property="og:title" content="Traces of Light" />
+      <meta property="og:description" content="Photographic portofolio of Alejandro Herr" />
+      <meta property="og:image" content="https://traces-of-light.alejandroherr.io/static/gdansk_03-9b5fb7859c1230996694de3933f9c97f-b473f.jpg" />
+      <meta property="og:type" content="website" />
+      <html lang="en" />
+    </Helmet>
+    <div>
+      <Header title={siteMetadata.title} />
+      {children}
+    </div>
+  </>
 );
 
 LayoutRenderer.propTypes = {
