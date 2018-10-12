@@ -48,9 +48,7 @@ exports.createPages = ({ graphql, actions }) => {
         pageLength: 6,
       });
 
-      const imagesByTag = data.images.edges.reduce((byTag, edge) => {
-        const { node } = edge;
-
+      const imagesByTag = data.images.edges.reduce((byTag, { node }) => {
         if (!node.tags && !node.tags.length) {
           return byTag;
         }
