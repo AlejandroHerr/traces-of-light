@@ -16,16 +16,12 @@ const GalleryPage = ({
   },
   pageContext: {
     group,
-    first,
-    index,
-    last,
-    pageCount,
-    pathPrefix,
+    ...pagination
   },
 }) => (
   <Layout pathname={pathname} image={group[0].image.childImageSharp.resize}>
     <Carousel images={group} />
-    <Footer first={first} index={index} last={last} pageCount={pageCount} pathPrefix={pathPrefix} />
+    <Footer pagination={pagination} />
   </Layout>
 );
 
