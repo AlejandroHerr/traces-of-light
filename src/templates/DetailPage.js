@@ -23,7 +23,7 @@ const GalleryPage = ({
     pathPrefix,
   },
 }) => (
-  <Layout pathname={pathname} image={group[0].image.childImageSharp.resize}>
+  <Layout pathname={pathname} image={group[0].node.image.childImageSharp.resize}>
     <Carousel images={group} />
     <Footer first={first} index={index} last={last} pageCount={pageCount} pathPrefix={pathPrefix} />
   </Layout>

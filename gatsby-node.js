@@ -42,30 +42,30 @@ exports.createPages = ({ graphql, actions }) => {
     })
     .then(({ data }) => {
       createPaginatedPages({
-        edges: data.images.edges,
+        edges: data.images.edges.map(({ node }) => node),
         createPage,
         pageTemplate: 'src/templates/GalleryPage.js',
         pageLength: 6,
       });
 
       const imagesByTag = data.images.edges.reduce((byTag, edge) => {
-        const { node: image } = edge;
+        const { node } = edge;
 
-        if (!image.tags && !image.tags.length) {
+        if (!node.tags && !node.tags.length) {
           return byTag;
         }
 
-        return image.tags.map(slugify).reduce((acc, tag) => {
+        return node.tags.map(slugify).reduce((acc, tag) => {
           if (acc[tag]) {
             return {
               ...acc,
-              [tag]: acc[tag].concat(edge),
+              [tag]: acc[tag].concat(node),
             };
           }
 
           return {
             ...acc,
-            [tag]: [edge],
+            [tag]: [node],
           };
         }, byTag);
       }, {});
