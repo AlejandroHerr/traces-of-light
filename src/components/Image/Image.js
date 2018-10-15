@@ -1,34 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import GatsbyImage from 'gatsby-image';
-import GatsbyLink from 'gatsby-link';
-import slugify from 'slugify';
 
 import ImageSharpTypes from '../../propTypes/ImageSharpTypes';
 
-import styles from './Image.module.scss';
+import TagList from '../TagList';
 
-const TagLink = ({ tag }) => (
-  <GatsbyLink className={styles.image_tagLink} to={slugify(tag)}>
-    {tag}
-  </GatsbyLink>
-);
-TagLink.propTypes = {
-  tag: PropTypes.string.isRequired,
-};
-const Tag = ({ tag, last }) => (last
-  ? (
-    <>
-      <TagLink tag={tag} />
-      {', '}
-    </>
-  )
-  : <TagLink tag={tag} />
-);
-Tag.propTypes = {
-  tag: PropTypes.string.isRequired,
-  last: PropTypes.bool.isRequired,
-};
+import styles from './Image.module.scss';
 
 const Image = ({
   height, title, tags, image: { childImageSharp },
@@ -39,11 +17,7 @@ const Image = ({
         <h2 className={styles.image_title}>
           {title || tags}
         </h2>
-        <div className={styles.image_tags}>
-          {(tags && tags.length)
-            && tags.map((tag, idx) => <Tag key={tag} tag={tag} last={(idx + 1) < tags.length} />)
-          }
-        </div>
+        <TagList className={styles.image_tagList} tags={tags} />
       </div>
       <div style={{ height, width: height * childImageSharp.fluid.aspectRatio }}>
         <GatsbyImage fluid={childImageSharp.fluid} height={height} />

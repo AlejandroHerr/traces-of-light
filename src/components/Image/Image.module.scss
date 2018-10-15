@@ -40,7 +40,7 @@
   text-transform: uppercase;
 }
 
-.image_tags {
+.image_tagList {
   position: absolute;
   bottom: 30px;
   left: 30px;
@@ -49,19 +49,19 @@
   font-size: .688em;
   text-shadow: 1px 1px 0 rgba(0, 0, 0, .6);
   text-transform: uppercase;
-}
 
-.image_tagLink {
-  color: $WHITE;
-  text-decoration: none;
-
-  &:hover {
-    color: $WHITE;
-    text-decoration: underline;
-  }
-
-  &:visited {
+  a {
     color: $WHITE;
     text-decoration: none;
+
+    &:hover {
+      color: $WHITE;
+      text-decoration: underline;
+    }
+
+    &:visited {
+      color: $WHITE;
+      text-decoration: none;
+    }
   }
 }
