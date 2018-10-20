@@ -1,19 +1,20 @@
 import React from 'react';
 
-import Pagination from './Pagination';
+import LicenseTypes from '../../propTypes/LicenseTypes';
+import { PaginationTypes } from '../../propTypes/PathContextTypes';
 
 import styles from './Footer.module.scss';
 import License from './License';
-import { PaginationTypes } from '../../propTypes/PathContextTypes';
+import Pagination from './Pagination';
 
-const Footer = ({ pagination }) => (
+const Footer = ({ license, pagination }) => (
   <footer className={styles.footer}>
-    <div className={styles.footer_license}>
-      <License />
-    </div>
+    <section className={styles.footer_license}>
+      <License license={license} />
+    </section>
     {pagination
       ? (
-        <div className={styles.footer_pagination}>
+        <section className={styles.footer_pagination}>
           <Pagination
             first={pagination.first}
             index={pagination.index}
@@ -21,7 +22,7 @@ const Footer = ({ pagination }) => (
             pageCount={pagination.pageCount}
             pathPrefix={pagination.pathPrefix}
           />
-        </div>
+        </section>
       )
       : null
     }
@@ -29,6 +30,7 @@ const Footer = ({ pagination }) => (
 );
 
 Footer.propTypes = {
+  license: LicenseTypes.isRequired,
   pagination: PaginationTypes,
 };
 

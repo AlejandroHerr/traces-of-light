@@ -7,6 +7,8 @@ module.exports = {
     keywords: 'photography, analog',
     author: 'Alejandro Hernandez',
     canonical: 'https://traces-of-light.alejandroherr.io',
+    license: 'by-sa',
+    licenseBy: 'alejandroherr.io',
   },
   plugins: [
     'gatsby-plugin-react-helmet',
