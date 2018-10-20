@@ -1,0 +1,68 @@
+@import '../../vars';
+
+$FOOTER_HEIGHT: 100px;
+
+.imageDetail_image_container {
+  overflow: hidden;
+}
+
+// ImageBody //
+
+.imageBody_wrapper {
+  height: 100%;
+  padding: 5px 0;
+}
+
+.imageBody_info {
+  float: left;
+  color: $BLACK_SHADOW;
+  font-family: $MAIN_FONT_FAMILY;
+}
+
+.imageBody_title {
+  font-family: $MAIN_FONT_FAMILY;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+}
+
+.imageBody_tags {
+  a {
+    font-family: $MAIN_FONT_FAMILY;
+    font-size: .688em;
+    text-shadow: 1px 1px 0 rgba(200, 200, 200, .6);
+    text-transform: uppercase;
+
+    &,
+    &:hover,
+    &:visited {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.imageBody_share {
+  float: right;
+}
+
+// ShareImage //
+
+.shareImage_button {
+  margin-left: 5px;
+  border-radius: 2px;
+  float: right;
+  overflow: hidden;
+  cursor: pointer;
+
+  &:last-child {
+    margin: 0;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}

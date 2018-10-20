@@ -1,40 +1,41 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-import Pagination from './Pagination';
+import LicenseTypes from '../../propTypes/LicenseTypes';
+import { PaginationTypes } from '../../propTypes/PathContextTypes';
 
 import styles from './Footer.module.scss';
 import License from './License';
+import Pagination from './Pagination';
 
-const Footer = ({
-  first, index, last, pageCount, pathPrefix,
-}) => (
+const Footer = ({ license, pagination }) => (
   <footer className={styles.footer}>
-    <div className={styles.footer_license}>
-      <License />
-    </div>
-    <div className={styles.footer_pagination}>
-      <Pagination
-        first={first}
-        index={index}
-        last={last}
-        pageCount={pageCount}
-        pathPrefix={pathPrefix}
-      />
-    </div>
+    <section className={styles.footer_license}>
+      <License license={license} />
+    </section>
+    {pagination
+      ? (
+        <section className={styles.footer_pagination}>
+          <Pagination
+            first={pagination.first}
+            index={pagination.index}
+            last={pagination.last}
+            pageCount={pagination.pageCount}
+            pathPrefix={pagination.pathPrefix}
+          />
+        </section>
+      )
+      : null
+    }
   </footer>
 );
 
 Footer.propTypes = {
-  first: PropTypes.bool.isRequired,
-  index: PropTypes.number.isRequired,
-  last: PropTypes.bool.isRequired,
-  pageCount: PropTypes.number.isRequired,
-  pathPrefix: PropTypes.string,
+  license: LicenseTypes.isRequired,
+  pagination: PaginationTypes,
 };
 
 Footer.defaultProps = {
-  pathPrefix: '',
+  pagination: null,
 };
 
 export default Footer;

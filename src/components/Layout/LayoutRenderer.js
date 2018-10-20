@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 
-import Header from '../Header';
+import buildUrl from '../../utils/buildUrl';
 
-const buildUrl = (base, pathname = '') => `${base}${pathname}`.replace(/\/$/, '');
+import Header from '../Header';
 
 const LayoutRenderer = ({
   children, image, pathname, siteMetadata,
@@ -41,7 +41,7 @@ LayoutRenderer.propTypes = {
   image: PropTypes.shape({
     src: PropTypes.string.isRequired,
   }),
-  pathname: PropTypes.string.isRequired,
+  pathname: PropTypes.string,
   siteMetadata: PropTypes.shape({
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
@@ -53,6 +53,7 @@ LayoutRenderer.propTypes = {
 
 LayoutRenderer.defaultProps = {
   image: null,
+  pathname: '',
 };
 
 export default LayoutRenderer;

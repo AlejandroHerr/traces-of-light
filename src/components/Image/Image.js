@@ -4,31 +4,13 @@ import GatsbyImage from 'gatsby-image';
 import GatsbyLink from 'gatsby-link';
 import slugify from 'slugify';
 
+import { IMAGE_PREFIX } from '../../constants/paths';
 import ImageSharpTypes from '../../propTypes/ImageSharpTypes';
+import buildUrl from '../../utils/buildUrl';
+
+import TagList from '../TagList';
 
 import styles from './Image.module.scss';
-
-const TagLink = ({ tag }) => (
-  <GatsbyLink className={styles.image_tagLink} to={slugify(tag)}>
-    {tag}
-  </GatsbyLink>
-);
-TagLink.propTypes = {
-  tag: PropTypes.string.isRequired,
-};
-const Tag = ({ tag, last }) => (last
-  ? (
-    <>
-      <TagLink tag={tag} />
-      {', '}
-    </>
-  )
-  : <TagLink tag={tag} />
-);
-Tag.propTypes = {
-  tag: PropTypes.string.isRequired,
-  last: PropTypes.bool.isRequired,
-};
 
 const Image = ({
   height, title, tags, image: { childImageSharp },
@@ -36,14 +18,12 @@ const Image = ({
   <article className={styles.image}>
     <div className={styles.image_wrapper}>
       <div className={styles.image_info}>
-        <h2 className={styles.image_title}>
-          {title || tags}
-        </h2>
-        <div className={styles.image_tags}>
-          {(tags && tags.length)
-            && tags.map((tag, idx) => <Tag key={tag} tag={tag} last={(idx + 1) < tags.length} />)
-          }
-        </div>
+        <GatsbyLink to={buildUrl(IMAGE_PREFIX, slugify(title, { lower: true }))}>
+          <h2 className={styles.image_title}>
+            {title}
+          </h2>
+        </GatsbyLink>
+        <TagList className={styles.image_tagList} tags={tags} />
       </div>
       <div style={{ height, width: height * childImageSharp.fluid.aspectRatio }}>
         <GatsbyImage fluid={childImageSharp.fluid} height={height} />

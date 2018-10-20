@@ -1,5 +1,18 @@
+const path = require('path');
 const createPaginatedPages = require('gatsby-paginate');
 const slugify = require('slugify');
+
+exports.onCreateNode = ({ node, actions }) => {
+  const { createNodeField } = actions;
+
+  if (node.internal.type === 'ImagesJson') {
+    createNodeField({
+      node,
+      name: 'slug',
+      value: slugify(node.title, { lower: true }),
+    });
+  }
+};
 
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions;
@@ -28,6 +41,9 @@ exports.createPages = ({ graphql, actions }) => {
                   }
                 }
               }
+              fields {
+                slug
+              }
             }
           }
         }
@@ -41,31 +57,41 @@ exports.createPages = ({ graphql, actions }) => {
       return result;
     })
     .then(({ data }) => {
+      const nodes = data.images.edges.map(({ node }) => node);
+
+      nodes.forEach((node) => {
+        createPage({
+          path: `image/${node.fields.slug}`,
+          component: path.resolve('./src/templates/DetailPage.js'),
+          context: {
+            node,
+          },
+        });
+      });
+
       createPaginatedPages({
-        edges: data.images.edges,
+        edges: nodes,
         createPage,
         pageTemplate: 'src/templates/GalleryPage.js',
         pageLength: 6,
       });
 
-      const imagesByTag = data.images.edges.reduce((byTag, edge) => {
-        const { node: image } = edge;
-
-        if (!image.tags && !image.tags.length) {
+      const imagesByTag = nodes.reduce((byTag, node) => {
+        if (!node.tags && !node.tags.length) {
           return byTag;
         }
 
-        return image.tags.map(slugify).reduce((acc, tag) => {
+        return node.tags.map(slugify).reduce((acc, tag) => {
           if (acc[tag]) {
             return {
               ...acc,
-              [tag]: acc[tag].concat(edge),
+              [tag]: acc[tag].concat(node),
             };
           }
 
           return {
             ...acc,
-            [tag]: [edge],
+            [tag]: [node],
           };
         }, byTag);
       }, {});
@@ -76,7 +102,7 @@ exports.createPages = ({ graphql, actions }) => {
           createPage,
           pageTemplate: 'src/templates/GalleryPage.js',
           pageLength: 6,
-          pathPrefix: tag,
+          pathPrefix: `tag/${tag}`,
         });
       });
 

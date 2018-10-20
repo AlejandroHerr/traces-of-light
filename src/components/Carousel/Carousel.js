@@ -2,7 +2,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-import { EdgeTypes } from '../../propTypes/EdgesTypes';
 import ImageTypes from '../../propTypes/ImageTypes';
 
 import CarouselRenderer from './CarouselRenderer';
@@ -13,7 +12,7 @@ const calculateDimensions = (wrapper, images) => {
   const { clientHeight, clientWidth } = wrapper;
 
   const widthFactor = images.reduce(
-    (sum, { node }) => node.image.childImageSharp.fluid.aspectRatio + sum,
+    (sum, node) => node.image.childImageSharp.fluid.aspectRatio + sum,
     0,
   );
   const innerWidth = widthFactor * (clientHeight) + (images.length - 1) * 10 + 1;
@@ -37,10 +36,6 @@ const calculateViewPortOffset = ({
 };
 
 export default class Carrousel extends PureComponent {
-  static propTypes = {
-    images: PropTypes.arrayOf(EdgeTypes(ImageTypes)).isRequired,
-  }
-
   state = {
     height: 0,
     width: 0,
@@ -253,3 +248,7 @@ export default class Carrousel extends PureComponent {
     );
   }
 }
+
+Carrousel.propTypes = {
+  images: PropTypes.arrayOf(ImageTypes).isRequired,
+};

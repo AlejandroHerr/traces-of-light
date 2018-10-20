@@ -6,7 +6,11 @@ module.exports = {
     description: 'Photographic portofolio of Alejandro Herr',
     keywords: 'photography, analog',
     author: 'Alejandro Hernandez',
-    canonical: 'https://traces-of-light.alejandroherr.io',
+    canonical: process.env.DEPLOY_ENV === 'STAGE'
+      ? 'https://stage.traces-of-light.alejandroherr.io'
+      : 'https://traces-of-light.alejandroherr.io',
+    license: 'by-sa',
+    licenseBy: 'alejandroherr.io',
   },
   plugins: [
     'gatsby-plugin-react-helmet',

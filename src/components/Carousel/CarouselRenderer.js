@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { EdgeTypes } from '../../propTypes/EdgesTypes';
 import ImageTypes from '../../propTypes/ImageTypes';
 
 import ScrollBar from './ScrollBar';
@@ -35,7 +34,7 @@ const CarouselRenderer = ({
         transform: `translate3d(-${viewPortOffset}%,0,0)`,
       }}
     >
-      {images.map(({ node }) => (
+      {images.map(node => (
         <Image
           key={node.id}
           height={height}
@@ -54,7 +53,7 @@ const CarouselRenderer = ({
 );
 
 CarouselRenderer.propTypes = {
-  images: PropTypes.arrayOf(EdgeTypes(ImageTypes)).isRequired,
+  images: PropTypes.arrayOf(ImageTypes).isRequired,
   height: PropTypes.number.isRequired,
   width: PropTypes.number.isRequired,
   innerWidth: PropTypes.number.isRequired,
