@@ -2,8 +2,6 @@ const path = require('path');
 const createPaginatedPages = require('gatsby-paginate');
 const slugify = require('slugify');
 
-const { IMAGE_PREFIX, TAG_PREFIX } = require('./src/constants/paths');
-
 exports.onCreateNode = ({ node, actions }) => {
   const { createNodeField } = actions;
 
@@ -63,7 +61,7 @@ exports.createPages = ({ graphql, actions }) => {
 
       nodes.forEach((node) => {
         createPage({
-          path: `${IMAGE_PREFIX}/${node.fields.slug}`,
+          path: `image/${node.fields.slug}`,
           component: path.resolve('./src/templates/DetailPage.js'),
           context: {
             node,
@@ -104,7 +102,7 @@ exports.createPages = ({ graphql, actions }) => {
           createPage,
           pageTemplate: 'src/templates/GalleryPage.js',
           pageLength: 6,
-          pathPrefix: `${TAG_PREFIX}/${tag}`,
+          pathPrefix: `tag/${tag}`,
         });
       });
 
