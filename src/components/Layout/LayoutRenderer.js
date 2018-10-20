@@ -41,7 +41,7 @@ LayoutRenderer.propTypes = {
   image: PropTypes.shape({
     src: PropTypes.string.isRequired,
   }),
-  pathname: PropTypes.string.isRequired,
+  pathname: PropTypes.string,
   siteMetadata: PropTypes.shape({
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
@@ -53,6 +53,7 @@ LayoutRenderer.propTypes = {
 
 LayoutRenderer.defaultProps = {
   image: null,
+  pathname: '',
 };
 
 export default LayoutRenderer;
