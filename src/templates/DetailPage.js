@@ -1,37 +1,34 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 import Layout from '../components/Layout';
 
-import Carousel from '../components/Carousel';
+// import Carousel from '../components/Carousel';
 import Footer from '../components/Footer';
-
 import ImageTypes from '../propTypes/ImageTypes';
-import PathContextTypes from '../propTypes/PathContextTypes';
+// import PathContextTypes from '../propTypes/PathContextTypes';
 import LocationTypes from '../propTypes/LocationTypes';
+import ImageDetail from '../components/ImageDetail';
 
-const GalleryPage = ({
+const DetailPage = ({
   location: {
     pathname,
   },
   pageContext: {
-    group,
-    first,
-    index,
-    last,
-    pageCount,
-    pathPrefix,
+    node,
   },
 }) => (
-  <Layout pathname={pathname} image={group[0].node.image.childImageSharp.resize}>
-    <Carousel images={group} />
-    <Footer first={first} index={index} last={last} pageCount={pageCount} pathPrefix={pathPrefix} />
+  <Layout pathname={pathname} image={node.image.childImageSharp.resize}>
+    <ImageDetail node={node} />
+    <Footer />
   </Layout>
 );
 
-GalleryPage.propTypes = {
+DetailPage.propTypes = {
   location: LocationTypes.isRequired,
-  pageContext: PathContextTypes(ImageTypes).isRequired,
+  pageContext: PropTypes.shape({
+    node: ImageTypes.isRequired,
+  }).isRequired,
 };
 
-export default GalleryPage;
+export default DetailPage;
