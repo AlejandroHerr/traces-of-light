@@ -1,5 +1,20 @@
+const path = require('path');
 const createPaginatedPages = require('gatsby-paginate');
 const slugify = require('slugify');
+
+const { IMAGE_PREFIX, TAG_PREFIX } = require('./src/constants/paths');
+
+exports.onCreateNode = ({ node, actions }) => {
+  const { createNodeField } = actions;
+
+  if (node.internal.type === 'ImagesJson') {
+    createNodeField({
+      node,
+      name: 'slug',
+      value: slugify(node.title, { lower: true }),
+    });
+  }
+};
 
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions;
@@ -28,6 +43,9 @@ exports.createPages = ({ graphql, actions }) => {
                   }
                 }
               }
+              fields {
+                slug
+              }
             }
           }
         }
@@ -41,14 +59,26 @@ exports.createPages = ({ graphql, actions }) => {
       return result;
     })
     .then(({ data }) => {
+      const nodes = data.images.edges.map(({ node }) => node);
+
+      nodes.forEach((node) => {
+        createPage({
+          path: `${IMAGE_PREFIX}/${node.fields.slug}`,
+          component: path.resolve('./src/templates/DetailPage.js'),
+          context: {
+            node,
+          },
+        });
+      });
+
       createPaginatedPages({
-        edges: data.images.edges.map(({ node }) => node),
+        edges: nodes,
         createPage,
         pageTemplate: 'src/templates/GalleryPage.js',
         pageLength: 6,
       });
 
-      const imagesByTag = data.images.edges.reduce((byTag, { node }) => {
+      const imagesByTag = nodes.reduce((byTag, node) => {
         if (!node.tags && !node.tags.length) {
           return byTag;
         }
@@ -74,7 +104,7 @@ exports.createPages = ({ graphql, actions }) => {
           createPage,
           pageTemplate: 'src/templates/GalleryPage.js',
           pageLength: 6,
-          pathPrefix: tag,
+          pathPrefix: `${TAG_PREFIX}/${tag}`,
         });
       });
 

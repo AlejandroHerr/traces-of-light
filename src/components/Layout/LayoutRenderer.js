@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 
-import Header from '../Header';
+import buildUrl from '../../utils/buildUrl';
 
-const buildUrl = (base, pathname = '') => `${base}${pathname}`.replace(/\/$/, '');
+import Header from '../Header';
 
 const LayoutRenderer = ({
   children, image, pathname, siteMetadata,

@@ -6,4 +6,7 @@ export default PropTypes.shape({
   title: PropTypes.string,
   tags: PropTypes.arrayOf(PropTypes.string),
   image: ImageSharpTypes.isRequired,
+  fields: PropTypes.shape({
+    slug: PropTypes.string.isRequired,
+  }).isRequired,
 });

@@ -11,7 +11,9 @@ const License = () => (
         src="https://mirrors.creativecommons.org/presskit/buttons/80x15/svg/by-sa.svg"
       />
     </a>
-      License
+      by
+    {' '}
+    <span className={styles.license_author}>Alejandro Hernández</span>
   </div>
 );
 

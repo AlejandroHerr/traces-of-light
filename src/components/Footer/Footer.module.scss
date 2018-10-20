@@ -11,7 +11,6 @@
   font-family: $MAIN_FONT_FAMILY;
   font-size: .75em;
   line-height: 40px;
-  text-transform: uppercase;
 }
 
 .footer_license {
@@ -25,8 +24,13 @@
   vertical-align: middle;
 }
 
+.license_author {
+  text-transform: uppercase;
+}
+
 .footer_pagination {
   float: right;
+  text-transform: uppercase;
 }
 
 .pagination_nav_placeholder,
